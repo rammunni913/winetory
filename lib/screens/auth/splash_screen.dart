@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import '../../providers/auth_provider.dart';
 import '../super_admin/super_admin_dashboard.dart';
@@ -25,6 +26,8 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _checkAuth() async {
     AuthProvider authProvider = Provider.of<AuthProvider>(context, listen: false);
     bool isLoggedIn = await authProvider.checkAuthStatus();
+
+    FlutterNativeSplash.remove();
 
     if (mounted) {
       if (isLoggedIn) {
