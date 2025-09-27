@@ -1,4 +1,4 @@
-package com.example.wine_tory
+package com.winetory.management
 
 import io.flutter.embedding.android.FlutterActivity
 
