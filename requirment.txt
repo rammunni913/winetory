@@ -1,0 +1,215 @@
+App name :  Wine TorY
+ Management System – Flutter Based app with animated and beautofull ui 
+Reffrence image : C:\Users\madhusudans\Desktop\wine tory\image.png anlyis design and make same like this withfully smooth and bautifully and link firebase terminal and 
+ 
+This project will be built only with Firebase (Realtime Database + Firestore + Authentication + Cloud Messaging).
+All date/time fields are auto-captured with Firebase server timestamp.
+________________________________________
+🔑 Authentication & Super Admin Login
+•	Default Super Admin credentials:
+o	Mobile: 8989898989
+o	Password: 89897979
+•	First Login Flow:
+o	Super Admin must enter old mobile & old password.
+o	If both match → set new mobile & password.
+o	After update, the old credentials are permanently replaced.
+📲 Role-Based Dashboards
+🟣 Super Admin Dashboard
+•	Manage Admins, Salesmen, Employees
+•	Add/Edit/Deactivate Shops
+•	View full stock, purchases, sales, expenses, commissions for all branches
+•	Generate statements: Daily, Weekly, Monthly, 3M, 6M, 12M, Custom Range
+•	Assign roles and permissions
+📲 Role-Based Dashboards
+🟣 Super Admin Dashboard
+•	Manage Admins, Salesmen, Employees
+•	Add/Edit/Deactivate Shops
+•	View full stock, purchases, sales, expenses, commissions for all branches
+•	Generate statements: Daily, Weekly, Monthly, 3M, 6M, 12M, Custom Range
+•	Assign roles and permissions
+________________________________________
+🔵 Admin Dashboard
+•	Product Management: Add/Update products & rate list
+•	Stock Management: Opening stock, purchases, transfers, closing stock
+•	Approve Salesman Purchases: Validate stock requests
+•	View Sales & Expenses: Per shop & per salesman
+•	Profit & Loss Reports: Includes commission deductions
+•	Expense Management: Add descriptions for dropdown list
+•	Salesman Management:
+o	Assign Salesman to Shop with date (searchable dropdown of shops → select shop → select salesman)
+o	On assignment → salesman app receives push notification:
+“Today assigned: ROHIT for #ShopName, Mobile: ######”
+o	In Salesman App Dashboard: Shows “Assigned Shop & Date” info
+o	In Admin App Dashboard:
+	Current Date View: List of all assigned salesmen with shop & duty details
+	Date Filter: Admin can select any past date to view assignments
+	Weekly / Monthly / Custom Range: Show report of salesman assignments with duty logs
+________________________________________
+🟢 Salesman Dashboard
+•	Record sales transactions
+•	Auto stock update
+•	Print/Send invoice
+•	View current stock (read-only)
+•	Add expenses (dukaan/commission khata)
+•	View commission ledger
+•	Purhcage is new stock added 
+•	Receive push notification for duty assignment
+•	Dashboard shows: “Today’s Assigned Shop: [Name], [Date], [Shop Contact]”
+________________________________________
+📊 Statements & Reports
+•	Daily Report:
+o	Opening Stock
+o	Purchases
+o	Transfers
+o	Sales
+o	Closing Stock
+o	Expenses (dukaan + commission)
+o	Commission Loss
+o	Net Profit
+•	Weekly / Monthly / 3M / 6M / 12M / Custom Range
+•	Assignment Reports:
+o	Which Salesman worked in which Shop
+o	Date-wise duty logs
+o	Range-wise assignment history
+________________________________________
+⚡ Auto Features
+•	All createdAt & updatedAt → Firebase serverTimestamp
+•	Closing stock auto-calculation
+•	Commission auto-calculation → commission = adminRate - salesRate (if salesRate < adminRate)
+•	Duty notification auto-trigger → Firestore → FCM push to salesman
+________________________________________
+✅ This system ensures:
+•	Super Admin: full control across all branches
+•	Admin: product, stock, sales, expense, and salesman assignment management
+•	Salesman: restricted to sales, expenses, and duty logs
+•	Reports: professional, filterable, exportable
+•	All powered by Firebase Firestore & Realtime triggers
+This below table make width fit to display 
+📊 Stock Table Design (Category-wise)
+Example: English Liquor Table
+Product Name	Size	Unit (Bottle/Box)	Opening Stock	Purchase	Sent	Sale	Closing Stock	Unit Price	Auto Total
+Royal Stag	750ml	Bottle	50	20	10	30	30	₹600	₹18,000
+Blender’s Pride	375ml	Box (12 Bottles)	5	2	0	3	4	₹4500	₹13,500
+________________________________________
+Example: Desi Liquor Table
+Product Name	Size	Unit	Opening	Purchase	Sent	Sale	Closing	Unit Price	Auto Total
+Santra Desi	180ml	Bottle	100	50	20	80	50	₹60	₹4,800
+Masala Desi	750ml	Box (12 Bottles)	8	3	0	5	6	₹5000	₹25,000
+________________________________________
+Example: Beer Table
+Product Name	Size	Unit	Opening	Purchase	Sent	Sale	Closing	Unit Price	Auto Total
+Kingfisher	650ml	Bottle	200	50	30	100	120	₹120	₹12,000
+Tuborg Strong	500ml	Can	100	40	10	60	70	₹90	₹5,400
+Porduct categories and weight and weight tile and box and bottle anything manage my admin add new or modiy or delete anything and 
+🔹 Product & Stock Design
+📦 Product Categories
+1.	English Liquor
+o	Whisky
+o	Vodka
+o	Rum
+o	Gin
+o	Brandy
+o	Wine (Red, White, Sparkling, Rose)
+o	Champagne
+o	Tequila
+o	Liqueurs
+2.	Desi Liquor
+o	Country Liquor (Desi Daru, Masala, Plain)
+o	IMFL (750ml, 375ml, 180ml, 90ml small packs)
+3.	Beer
+o	Strong Beer
+o	Mild Beer
+o	Lager
+o	Stout
+o	Craft Beer
+o	Can Beer (330ml, 500ml)
+o	Bottle Beer (330ml, 650ml)
+________________________________________
+⚖️ Common Weights / Sizes (India – Maximum List)
+•	Bottles: 90ml, 180ml, 375ml, 500ml, 650ml, 700ml, 750ml, 1000ml (1L), 1500ml (1.5L)
+•	Cans: 330ml, 355ml, 500ml
+•	Boxes (Cases):
+o	Whisky/Rum/Vodka/Brandy: 12 bottles x (90ml, 180ml, 375ml, 750ml)
+o	Beer Bottles: 12 x (650ml), 24 x (330ml)
+o	Beer Cans: 24 x (330ml), 12 x (500ml)
+•	Bulk Packs: 2L, 3L, 5L
+✅ Admin Input Fields while Adding Product
+•	Product Name (with auto-suggest after 3 letters, dropdown of brands)
+•	Category (English/Desi/Beer)
+•	Sub-Category (Whisky, Rum, Vodka, etc.)
+•	Brand Name
+•	Size (dropdown from above list)
+•	Quantity Type (Bottle / Box)
+•	Quantity Value (No. of bottles / No. of boxes)
+•	Unit Price (per bottle or per box)
+•	Auto Total Calculation (Quantity × Unit Price)
+________________________________________
+🔹 Stock Management
+1.	Opening Stock (Defined at start of day/month per shop & category)
+2.	Purchase Stock (From suppliers, multiple products in one invoice)
+o	Auto-generate Invoice No. (INV-SHOPID-YYYYMMDD-0001)
+3.	Stock Transfer (Send to another branch, tracked in real time)
+4.	Sales Stock (Auto-deduct after every sale by salesman)
+5.	Closing Stock (Auto-calculated)
+All stock reports must be separate tables for English, Desi & Beer.
+________________________________________
+🔹 Shop & Invoice Management
+•	Each shop gets Auto-generated Shop Code (e.g., SHOP-A001, SHOP-B002).
+•	Every transaction (sale, purchase, transfer) generates a unique bill/invoice no.
+•	Admin & Super Admin can filter invoices by:
+o	Shop
+o	Product category
+o	Date range (daily, weekly, monthly, quarterly, yearly, custom range).
+________________________________________
+🔹 Roles & Permissions
+🟣 Super Admin
+•	Master control (all shops, all admins, all salesmen).
+•	Manage Shops (Add, Deactivate, Assign Shop Codes).
+•	Add / Update Employees (Admin, Salesman, Accountant).
+•	View Consolidated Reports (all shops combined).
+•	Send Push Notifications:
+o	All shops
+o	Selected shops
+o	Specific salesman(s)
+•	First login: must change default mobile & password (mobile: 8989898989, pass: 89897979).
+________________________________________
+🔵 Admin Dashboard
+•	Add / Update Products & Rate List.
+•	Manage Stock (Opening, Purchase, Transfer, Closing).
+•	Approve Salesman stock requests.
+•	View Branch-wise Sales & Expenses Reports.
+•	Generate Profit & Loss Report (includes commission as loss).
+•	Assign Salesmen to Shops (with date & duty transfer feature).
+o	Salesman app gets push notification:
+	“Today assigned: Rohit → Shop B (Mobile: xxxxxxxx)”
+o	Admin can see all assigned salesmen list with date & shop.
+o	Reports available by:
+	Daily, Weekly, Monthly, Custom Range.
+________________________________________
+🟢 Salesman App
+•	Record Sales (select product → enter qty → auto total).
+•	Print / Send Invoice to customer.
+•	View Remaining Stock (read-only).
+•	Raise stock request.
+•	Get push notification of shop duty assignment.
+•	Expenses Entry (if allowed):
+o	Dukaan Kharcha Khata (Shop Expenses – Tea, Disposable, Water, etc.)
+o	Commission Kharcha Khata (Unit Price – Sale Price = Loss/Commission).
+________________________________________
+🔹 Expenses Management
+Two Types of Expenses:
+1.	Dukaan Kharcha Khata (Shop Expenses)
+o	Tea for staff, Disposable Glasses, VIP Water, Cleaning, etc.
+o	Expense Description from Admin’s dropdown list.
+o	Amount (₹)
+o	Auto Date & Time Capture
+2.	Commission Kharcha Khata (Commission Expenses)
+o	Example: Admin sets rate 1200, Salesman sells at 1000 → 200 Commission Loss.
+o	Record: Amount, Description (auto from transaction), Date-Time.
+Expenses Reports:
+•	Shop-wise / Salesman-wise
+•	Daily, Weekly, Monthly, Quarterly, Yearly, Custom Range
+•	Card View (each day separate card with total & breakdown).
+
+
+

@@ -1,0 +1,70 @@
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null",
+    
+    "realtime_data": {
+      "$shopId": {
+        "stock_updates": {
+          ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() == 'super_admin' || root.child('users').child(auth.uid).child('role').val() == 'admin' || auth.uid in root.child('shops').child($shopId).child('salesmenIds').val())",
+          ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() == 'super_admin' || root.child('users').child(auth.uid).child('role').val() == 'admin' || auth.uid in root.child('shops').child($shopId).child('salesmenIds').val())",
+          ".indexOn": ["timestamp", "productId"]
+        },
+        
+        "sales_updates": {
+          ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() == 'super_admin' || root.child('users').child(auth.uid).child('role').val() == 'admin' || auth.uid in root.child('shops').child($shopId).child('salesmenIds').val())",
+          ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() == 'super_admin' || root.child('users').child(auth.uid).child('role').val() == 'admin' || auth.uid in root.child('shops').child($shopId).child('salesmenIds').val())",
+          ".indexOn": ["timestamp", "salesmanId"]
+        },
+        
+        "notifications": {
+          "$userId": {
+            ".read": "auth != null && (auth.uid == $userId || root.child('users').child(auth.uid).child('role').val() == 'super_admin' || root.child('users').child(auth.uid).child('role').val() == 'admin')",
+            ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() == 'super_admin' || root.child('users').child(auth.uid).child('role').val() == 'admin')",
+            ".indexOn": ["timestamp", "isRead"]
+          }
+        }
+      }
+    },
+    
+    "presence": {
+      "$userId": {
+        ".read": "auth != null",
+        ".write": "auth != null && auth.uid == $userId",
+        ".indexOn": ["lastSeen", "status"]
+      }
+    },
+    
+    "messages": {
+      "$chatId": {
+        ".read": "auth != null && (auth.uid in data.child('participants').val())",
+        ".write": "auth != null && (auth.uid in data.child('participants').val())",
+        "messages": {
+          ".indexOn": ["timestamp"]
+        }
+      }
+    },
+    
+    "dashboard_stats": {
+      "$shopId": {
+        ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() == 'super_admin' || root.child('users').child(auth.uid).child('role').val() == 'admin' || auth.uid in root.child('shops').child($shopId).child('salesmenIds').val())",
+        ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() == 'super_admin' || root.child('users').child(auth.uid).child('role').val() == 'admin')",
+        ".indexOn": ["lastUpdated"]
+      }
+    },
+    
+    "announcements": {
+      ".read": "auth != null",
+      ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'super_admin'",
+      ".indexOn": ["timestamp", "priority"]
+    },
+    
+    "activity_logs": {
+      "$shopId": {
+        ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() == 'super_admin' || root.child('users').child(auth.uid).child('role').val() == 'admin')",
+        ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() == 'super_admin' || root.child('users').child(auth.uid).child('role').val() == 'admin' || auth.uid in root.child('shops').child($shopId).child('salesmenIds').val())",
+        ".indexOn": ["timestamp", "userId", "action"]
+      }
+    }
+  }
+}

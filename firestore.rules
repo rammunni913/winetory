@@ -1,0 +1,217 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Helper function to get user data
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+    
+    // Helper function to get user role
+    function getUserRole() {
+      return getUserData().role;
+    }
+    
+    // Helper function to check if user is super admin
+    function isSuperAdmin() {
+      return isAuthenticated() && getUserRole() == 'super_admin';
+    }
+    
+    // Helper function to check if user is admin
+    function isAdmin() {
+      return isAuthenticated() && getUserRole() == 'admin';
+    }
+    
+    // Helper function to check if user is salesman
+    function isSalesman() {
+      return isAuthenticated() && getUserRole() == 'salesman';
+    }
+    
+    // Helper function to check if user is admin or super admin
+    function isAdminOrSuperAdmin() {
+      return isAuthenticated() && (getUserRole() == 'admin' || getUserRole() == 'super_admin');
+    }
+    
+    // Helper function to check if user owns the document
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    // Helper function to check if user can manage shop
+    function canManageShop(shopId) {
+      return isSuperAdmin() || 
+             (isAdmin() && get(/databases/$(database)/documents/shops/$(shopId)).data.adminId == request.auth.uid);
+    }
+    
+    // Users collection rules
+    match /users/{userId} {
+      // Allow read for authenticated users (to get their own data and colleagues)
+      allow read: if isAuthenticated();
+      
+      // Super admin can create/update/delete any user
+      allow write: if isSuperAdmin();
+      
+      // Admin can create/update salesmen only
+      allow create, update: if isAdmin() && 
+                               resource.data.role == 'salesman' &&
+                               request.resource.data.role == 'salesman';
+      
+      // Users can update their own profile (except role and critical fields)
+      allow update: if isOwner(userId) && 
+                       !('role' in request.resource.data.diff(resource.data).affectedKeys()) &&
+                       !('isActive' in request.resource.data.diff(resource.data).affectedKeys()) &&
+                       !('permissions' in request.resource.data.diff(resource.data).affectedKeys());
+    }
+    
+    // Shops collection rules
+    match /shops/{shopId} {
+      // Super admin can read/write all shops
+      allow read, write: if isSuperAdmin();
+      
+      // Admin can read/write shops they manage
+      allow read, write: if isAdmin() && resource.data.adminId == request.auth.uid;
+      
+      // Salesman can read shops they're assigned to
+      allow read: if isSalesman() && request.auth.uid in resource.data.salesmenIds;
+      
+      // Admin can create new shops (they become the admin)
+      allow create: if isAdmin() && request.resource.data.adminId == request.auth.uid;
+    }
+    
+    // Products collection rules
+    match /products/{productId} {
+      // Super admin can read/write all products
+      allow read, write: if isSuperAdmin();
+      
+      // Admin can read/write products for their shops
+      allow read, write: if isAdmin() && canManageShop(resource.data.shopId);
+      
+      // Salesman can read products for their assigned shops
+      allow read: if isSalesman() && 
+                     request.auth.uid in get(/databases/$(database)/documents/shops/$(resource.data.shopId)).data.salesmenIds;
+      
+      // Admin can create products for their shops
+      allow create: if isAdmin() && canManageShop(request.resource.data.shopId);
+    }
+    
+    // Stock collection rules
+    match /stock/{stockId} {
+      // Super admin can read/write all stock
+      allow read, write: if isSuperAdmin();
+      
+      // Admin can read/write stock for their shops
+      allow read, write: if isAdmin() && canManageShop(resource.data.shopId);
+      
+      // Salesman can read stock for their assigned shops
+      allow read: if isSalesman() && 
+                     request.auth.uid in get(/databases/$(database)/documents/shops/$(resource.data.shopId)).data.salesmenIds;
+      
+      // Admin can create stock entries for their shops
+      allow create: if isAdmin() && canManageShop(request.resource.data.shopId);
+    }
+    
+    // Sales collection rules
+    match /sales/{saleId} {
+      // Super admin can read/write all sales
+      allow read, write: if isSuperAdmin();
+      
+      // Admin can read/write sales for their shops
+      allow read, write: if isAdmin() && canManageShop(resource.data.shopId);
+      
+      // Salesman can create/read/update their own sales
+      allow read: if isSalesman() && resource.data.salesmanId == request.auth.uid;
+      allow create: if isSalesman() && 
+                       request.resource.data.salesmanId == request.auth.uid &&
+                       request.auth.uid in get(/databases/$(database)/documents/shops/$(request.resource.data.shopId)).data.salesmenIds;
+      allow update: if isSalesman() && 
+                       resource.data.salesmanId == request.auth.uid &&
+                       request.resource.data.salesmanId == request.auth.uid;
+    }
+    
+    // Expenses collection rules
+    match /expenses/{expenseId} {
+      // Super admin can read/write all expenses
+      allow read, write: if isSuperAdmin();
+      
+      // Admin can read/write expenses for their shops
+      allow read, write: if isAdmin() && canManageShop(resource.data.shopId);
+      
+      // Salesman can create/read/update their own expenses
+      allow read: if isSalesman() && resource.data.salesmanId == request.auth.uid;
+      allow create: if isSalesman() && 
+                       request.resource.data.salesmanId == request.auth.uid &&
+                       request.auth.uid in get(/databases/$(database)/documents/shops/$(request.resource.data.shopId)).data.salesmenIds;
+      allow update: if isSalesman() && 
+                       resource.data.salesmanId == request.auth.uid &&
+                       request.resource.data.salesmanId == request.auth.uid;
+    }
+    
+    // Assignments collection rules
+    match /assignments/{assignmentId} {
+      // Super admin can read/write all assignments
+      allow read, write: if isSuperAdmin();
+      
+      // Admin can create/read/update assignments for their shops
+      allow read, write: if isAdmin() && resource.data.adminId == request.auth.uid;
+      allow create: if isAdmin() && request.resource.data.adminId == request.auth.uid;
+      
+      // Salesman can read their assignments and update status
+      allow read: if isSalesman() && resource.data.salesmanId == request.auth.uid;
+      allow update: if isSalesman() && 
+                       resource.data.salesmanId == request.auth.uid &&
+                       request.resource.data.salesmanId == request.auth.uid &&
+                       // Only allow updating status and completion fields
+                       request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'completedAt', 'notes', 'updatedAt']);
+    }
+    
+    // Notifications collection rules
+    match /notifications/{notificationId} {
+      // Super admin can read/write all notifications
+      allow read, write: if isSuperAdmin();
+      
+      // Users can read their own notifications
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      
+      // Users can update their own notifications (mark as read)
+      allow update: if isAuthenticated() && 
+                       resource.data.userId == request.auth.uid &&
+                       request.resource.data.userId == request.auth.uid &&
+                       // Only allow updating read status
+                       request.resource.data.diff(resource.data).affectedKeys().hasOnly(['isRead', 'readAt', 'updatedAt']);
+      
+      // Admin can create notifications for their salesmen
+      allow create: if isAdmin() && request.resource.data.senderId == request.auth.uid;
+      
+      // Super admin can create notifications for anyone
+      allow create: if isSuperAdmin();
+    }
+    
+    // Reports collection rules (for cached reports)
+    match /reports/{reportId} {
+      // Super admin can read/write all reports
+      allow read, write: if isSuperAdmin();
+      
+      // Admin can read/write reports for their shops
+      allow read, write: if isAdmin() && resource.data.adminId == request.auth.uid;
+      allow create: if isAdmin() && request.resource.data.adminId == request.auth.uid;
+      
+      // Salesman can read reports related to them
+      allow read: if isSalesman() && resource.data.salesmanId == request.auth.uid;
+    }
+    
+    // System settings collection (super admin only)
+    match /settings/{settingId} {
+      allow read, write: if isSuperAdmin();
+    }
+    
+    // Audit logs collection (read-only for non-super admins)
+    match /audit_logs/{logId} {
+      allow read, write: if isSuperAdmin();
+      allow read: if isAdminOrSuperAdmin();
+    }
+  }
+}

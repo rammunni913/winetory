@@ -1,0 +1,13 @@
+{
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "files.associations": {
+        "*.pbxproj": "xml",
+        "*.xcconfig": "properties",
+        "*.plist": "xml",
+        "*.storyboard": "xml",
+        "*.xcworkspace": "xml"
+    },
+    "files.defaultLanguage": "dart",
+    "dart.flutterSdkPath": null,
+    "dart.sdkPath": null
+}

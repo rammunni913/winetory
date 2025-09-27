@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wine TorY - Web Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1A237E 0%, #3F51B5 50%, #9C27B0 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .logo {
+            margin-bottom: 30px;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1A237E, #3F51B5);
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 36px;
+            margin-bottom: 15px;
+            box-shadow: 0 10px 20px rgba(26, 35, 126, 0.3);
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #1A237E;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 18px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #1A237E, #3F51B5);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(26, 35, 126, 0.3);
+        }
+
+        .nav-btn.secondary {
+            background: linear-gradient(135deg, #9C27B0, #E91E63);
+        }
+
+        .nav-btn.secondary:hover {
+            box-shadow: 0 10px 25px rgba(156, 39, 176, 0.3);
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            color: #0277bd;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border: 1px solid #bbdefb;
+            font-size: 14px;
+        }
+
+        .info-box strong {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
+            .title {
+                font-size: 28px;
+            }
+
+            .nav-buttons {
+                gap: 12px;
+            }
+
+            .nav-btn {
+                padding: 15px 25px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <div class="logo-icon">🍷</div>
+            <h1 class="title">Wine TorY</h1>
+            <p class="subtitle">Management System - Web Interface</p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="firebase_test.html" class="nav-btn">
+                🔧 Test Firebase Connection
+            </a>
+            
+            <a href="super_admin_register.html" class="nav-btn secondary">
+                👑 Super Admin Registration
+            </a>
+        </div>
+
+        <div class="info-box">
+            <strong>📋 Available Pages:</strong>
+            • <strong>Firebase Test:</strong> Verify Firebase connection and database operations<br>
+            • <strong>Super Admin Registration:</strong> Create the initial super admin account (one-time only)
+        </div>
+    </div>
+</body>
+</html>

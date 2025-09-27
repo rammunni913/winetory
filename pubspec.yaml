@@ -1,0 +1,65 @@
+name: wine_tory
+description: Wine TorY Management System - Flutter App with Firebase
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # Firebase
+  firebase_core: ^4.1.1
+  firebase_auth: ^6.1.0
+  cloud_firestore: ^6.0.2
+  firebase_database: ^12.0.2
+  firebase_messaging: ^16.0.2
+  
+  # State Management
+  provider: ^6.1.1
+  
+  # UI & Navigation
+  cupertino_icons: ^1.0.2
+  flutter_svg: ^2.0.9
+  google_fonts: ^6.1.0
+  flutter_animate: ^4.5.0
+  
+  # Modern Animations & UI
+  lottie: ^3.1.2
+  rive: ^0.13.20
+  shimmer: ^3.0.0
+  animations: ^2.0.11
+  flutter_screenutil: ^5.9.3
+  flutter_native_splash: ^2.4.1
+  
+  # Utilities
+  shared_preferences: ^2.2.2
+  intl: ^0.20.2
+  uuid: ^4.2.1
+  url_launcher: ^6.2.2
+  
+  # Charts & Reports
+  fl_chart: ^1.1.1
+  
+  # Printing
+  printing: ^5.11.1
+  pdf: ^3.10.7
+  
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  
+# Native Splash Screen Configuration
+flutter_native_splash:
+  color: "#1A237E"
+  color_dark: "#000051"
+  web: true

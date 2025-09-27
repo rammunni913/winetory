@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "847892341234",
+    "project_id": "wine-tory-management-system",
+    "storage_bucket": "wine-tory-management-system.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847892341234:android:winetory123456789def",
+        "android_client_info": {
+          "package_name": "com.winetory.management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847892341234-winetory123456789.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvH3rJvOqY5KQGdL8N8XjQvKZHgYmE123"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847892341234-winetory123456789.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
