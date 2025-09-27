@@ -1,9 +1,9 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
   final String id;
   final String mobile;
-  final String password;
   final String role;
   final String name;
   final String? email;
@@ -17,7 +17,6 @@ class UserModel {
   UserModel({
     required this.id,
     required this.mobile,
-    required this.password,
     required this.role,
     required this.name,
     this.email,
@@ -34,7 +33,6 @@ class UserModel {
     return UserModel(
       id: doc.id,
       mobile: data['mobile'] ?? '',
-      password: data['password'] ?? '',
       role: data['role'] ?? '',
       name: data['name'] ?? '',
       email: data['email'],
@@ -50,7 +48,6 @@ class UserModel {
   Map<String, dynamic> toFirestore() {
     return {
       'mobile': mobile,
-      'password': password,
       'role': role,
       'name': name,
       'email': email,
@@ -66,7 +63,6 @@ class UserModel {
   UserModel copyWith({
     String? id,
     String? mobile,
-    String? password,
     String? role,
     String? name,
     String? email,
@@ -80,7 +76,6 @@ class UserModel {
     return UserModel(
       id: id ?? this.id,
       mobile: mobile ?? this.mobile,
-      password: password ?? this.password,
       role: role ?? this.role,
       name: name ?? this.name,
       email: email ?? this.email,

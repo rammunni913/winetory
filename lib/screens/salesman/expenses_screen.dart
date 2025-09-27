@@ -17,7 +17,7 @@ class ExpensesScreen extends StatefulWidget {
 
 class _ExpensesScreenState extends State<ExpensesScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  String _selectedType = 'All';
+  final String _selectedType = 'All';
 
   @override
   void initState() {

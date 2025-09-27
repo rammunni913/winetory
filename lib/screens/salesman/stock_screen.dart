@@ -6,7 +6,7 @@ import '../../utils/constants.dart';
 import '../../utils/theme.dart';
 
 class StockScreen extends StatefulWidget {
-  const StockScreen({Key? key}) : super(key: key);
+  const StockScreen({super.key});
 
   @override
   State<StockScreen> createState() => _StockScreenState();

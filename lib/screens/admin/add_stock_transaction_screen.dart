@@ -235,7 +235,7 @@ class _AddStockTransactionScreenState extends State<AddStockTransactionScreen> {
               
               // Transaction Type
               DropdownButtonFormField<String>(
-                value: _selectedTransactionType,
+                initialValue: _selectedTransactionType,
                 decoration: const InputDecoration(
                   labelText: 'Transaction Type *',
                   prefixIcon: Icon(Icons.swap_horiz),
@@ -268,7 +268,7 @@ class _AddStockTransactionScreenState extends State<AddStockTransactionScreen> {
               Consumer<ProductProvider>(
                 builder: (context, productProvider, child) {
                   return DropdownButtonFormField<String>(
-                    value: _selectedProductId,
+                    initialValue: _selectedProductId,
                     decoration: const InputDecoration(
                       labelText: 'Product *',
                       prefixIcon: Icon(Icons.inventory),
@@ -303,7 +303,7 @@ class _AddStockTransactionScreenState extends State<AddStockTransactionScreen> {
               Consumer<ShopProvider>(
                 builder: (context, shopProvider, child) {
                   return DropdownButtonFormField<String>(
-                    value: _selectedShopId,
+                    initialValue: _selectedShopId,
                     decoration: InputDecoration(
                       labelText: _selectedTransactionType == 'Transfer' ? 'From Shop *' : 'Shop *',
                       prefixIcon: const Icon(Icons.store),
@@ -342,7 +342,7 @@ class _AddStockTransactionScreenState extends State<AddStockTransactionScreen> {
                 Consumer<ShopProvider>(
                   builder: (context, shopProvider, child) {
                     return DropdownButtonFormField<String>(
-                      value: _selectedToShopId,
+                      initialValue: _selectedToShopId,
                       decoration: const InputDecoration(
                         labelText: 'To Shop *',
                         prefixIcon: Icon(Icons.store),

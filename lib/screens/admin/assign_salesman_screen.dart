@@ -198,7 +198,7 @@ class _AssignSalesmanScreenState extends State<AssignSalesmanScreen> {
             Consumer<ShopProvider>(
               builder: (context, shopProvider, child) {
                 return DropdownButtonFormField<String>(
-                  value: _selectedShopId,
+                  initialValue: _selectedShopId,
                   decoration: const InputDecoration(
                     labelText: 'Select Shop *',
                     prefixIcon: Icon(Icons.store),
@@ -237,7 +237,7 @@ class _AssignSalesmanScreenState extends State<AssignSalesmanScreen> {
                   builder: (context, snapshot) {
                     final salesmen = snapshot.data ?? <UserModel>[];
                     return DropdownButtonFormField<String>(
-                  value: _selectedSalesmanId,
+                  initialValue: _selectedSalesmanId,
                   decoration: const InputDecoration(
                     labelText: 'Select Salesman *',
                     prefixIcon: Icon(Icons.person),

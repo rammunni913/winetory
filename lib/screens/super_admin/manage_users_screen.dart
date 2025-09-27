@@ -117,7 +117,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> with SingleTicker
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Add your first ${role} to get started',
+                      'Add your first $role to get started',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: AppTheme.textSecondary,
                       ),

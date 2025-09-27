@@ -282,7 +282,7 @@ class DashboardHome extends StatelessWidget {
                         _buildStatCard(
                           context,
                           'Sales Count',
-                          '${salesProvider.getSalesSummary()['salesCount']?.toString() ?? '0'}',
+                          salesProvider.getSalesSummary()['salesCount']?.toString() ?? '0',
                           Icons.receipt,
                           AppTheme.primaryColor,
                           delay: 1800.ms,

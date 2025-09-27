@@ -5,7 +5,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../../providers/shop_provider.dart';
 import '../../models/shop_model.dart';
 import '../../utils/theme.dart';
-import '../../utils/constants.dart';
 import 'add_shop_screen.dart';
 
 class ManageShopsScreen extends StatefulWidget {

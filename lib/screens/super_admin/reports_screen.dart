@@ -18,7 +18,7 @@ class ReportsScreen extends StatefulWidget {
 class _ReportsScreenState extends State<ReportsScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   String _selectedReportType = 'Daily';
-  DateTime _selectedDate = DateTime.now();
+  final DateTime _selectedDate = DateTime.now();
   DateTimeRange? _selectedDateRange;
 
   @override
@@ -131,7 +131,7 @@ class _ReportsScreenState extends State<ReportsScreen> with SingleTickerProvider
                           _buildSummaryCard(
                             context,
                             'Sales Count',
-                            '${salesSummary['salesCount']?.toString() ?? '0'}',
+                            salesSummary['salesCount']?.toString() ?? '0',
                             Icons.receipt,
                             AppTheme.primaryColor,
                             delay: 800.ms,
@@ -217,7 +217,7 @@ class _ReportsScreenState extends State<ReportsScreen> with SingleTickerProvider
                         _buildSalesMetric(
                           context,
                           'Sales Count',
-                          '${salesProvider.getSalesSummary()['salesCount']?.toString() ?? '0'}',
+                          salesProvider.getSalesSummary()['salesCount']?.toString() ?? '0',
                           Icons.receipt,
                         ),
                       ],
@@ -299,7 +299,7 @@ class _ReportsScreenState extends State<ReportsScreen> with SingleTickerProvider
                         _buildExpenseMetric(
                           context,
                           'Expense Count',
-                          '${expenseProvider.getExpenseSummary()['expenseCount']?.toString() ?? '0'}',
+                          expenseProvider.getExpenseSummary()['expenseCount']?.toString() ?? '0',
                           Icons.receipt_long,
                         ),
                         _buildExpenseMetric(
@@ -816,7 +816,7 @@ class _ReportsScreenState extends State<ReportsScreen> with SingleTickerProvider
           mainAxisSize: MainAxisSize.min,
           children: [
             DropdownButtonFormField<String>(
-              value: _selectedReportType,
+              initialValue: _selectedReportType,
               decoration: const InputDecoration(
                 labelText: 'Report Type',
               ),

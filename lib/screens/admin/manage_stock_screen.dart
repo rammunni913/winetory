@@ -21,7 +21,7 @@ class _ManageStockScreenState extends State<ManageStockScreen> with SingleTicker
   late TabController _tabController;
   String _selectedShop = 'All';
   String _selectedCategory = 'All';
-  DateTime _selectedDate = DateTime.now();
+  final DateTime _selectedDate = DateTime.now();
 
   @override
   void initState() {
@@ -522,7 +522,7 @@ class _ManageStockScreenState extends State<ManageStockScreen> with SingleTicker
             Consumer<ShopProvider>(
               builder: (context, shopProvider, child) {
                 return DropdownButtonFormField<String>(
-                  value: _selectedShop,
+                  initialValue: _selectedShop,
                   decoration: const InputDecoration(
                     labelText: 'Shop',
                   ),
@@ -545,7 +545,7 @@ class _ManageStockScreenState extends State<ManageStockScreen> with SingleTicker
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<String>(
-              value: _selectedCategory,
+              initialValue: _selectedCategory,
               decoration: const InputDecoration(
                 labelText: 'Category',
               ),

@@ -234,7 +234,7 @@ class _AddSaleScreenState extends State<AddSaleScreen> {
               Consumer<ProductProvider>(
                 builder: (context, productProvider, child) {
                   return DropdownButtonFormField<String>(
-                    value: _selectedProductId,
+                    initialValue: _selectedProductId,
                     decoration: const InputDecoration(
                       labelText: 'Select Product *',
                       prefixIcon: Icon(Icons.inventory),

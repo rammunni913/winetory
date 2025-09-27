@@ -274,7 +274,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               
               // Category
               DropdownButtonFormField<String>(
-                value: _selectedCategory,
+                initialValue: _selectedCategory,
                 decoration: const InputDecoration(
                   labelText: 'Category *',
                   prefixIcon: Icon(Icons.category),
@@ -307,7 +307,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               // Sub Category
               if (_subCategories.isNotEmpty)
                 DropdownButtonFormField<String>(
-                  value: _selectedSubCategory.isNotEmpty ? _selectedSubCategory : _subCategories.first,
+                  initialValue: _selectedSubCategory.isNotEmpty ? _selectedSubCategory : _subCategories.first,
                   decoration: const InputDecoration(
                     labelText: 'Sub Category *',
                     prefixIcon: Icon(Icons.subdirectory_arrow_right),
@@ -338,7 +338,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               
               // Size
               DropdownButtonFormField<String>(
-                value: _selectedSize,
+                initialValue: _selectedSize,
                 decoration: const InputDecoration(
                   labelText: 'Size *',
                   prefixIcon: Icon(Icons.straighten),
@@ -369,7 +369,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               
               // Quantity Type
               DropdownButtonFormField<String>(
-                value: _selectedQuantityType,
+                initialValue: _selectedQuantityType,
                 decoration: const InputDecoration(
                   labelText: 'Quantity Type *',
                   prefixIcon: Icon(Icons.inventory),

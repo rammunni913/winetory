@@ -8,7 +8,6 @@ import '../../providers/product_provider.dart';
 import '../../providers/sales_provider.dart';
 import '../../providers/expense_provider.dart';
 import '../../utils/theme.dart';
-import '../../utils/constants.dart';
 import 'manage_shops_screen.dart';
 import 'manage_users_screen.dart';
 import 'reports_screen.dart';

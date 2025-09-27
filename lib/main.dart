@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
@@ -15,7 +13,6 @@ import 'providers/expense_provider.dart';
 import 'providers/notification_provider.dart';
 
 import 'screens/splash_screen.dart';
-import 'screens/auth/login_screen.dart';
 import 'screens/auth/modern_login_screen.dart';
 import 'screens/super_admin/super_admin_dashboard.dart';
 import 'screens/admin/admin_dashboard.dart';
